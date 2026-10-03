@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=816">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Egypt Eclipse Voyager Program | IMXP</title>
 <meta name="description" content="Join the Egypt Eclipse Voyager Program: an exclusive journey to witness the total solar eclipse over Luxor, August 2027. Expedition details, itinerary, and reservation info.">
 
@@ -31,9 +31,17 @@
 body{margin:0}
 a{color:#825931}a:hover{color:#2D2925}
 body{background:#D3C8B2}
+
+/* Mobile optimization: scale the fixed 816x1056 design to fit any screen width */
+#scale-wrap{width:816px;transform-origin:top center;margin:0 auto}
+body{overflow-x:hidden}
+@media (max-width: 816px){
+  body{display:flex;justify-content:center}
+}
 </style>
 </head>
 <body>
+<div id="scale-wrap">
 <main style="width: 816px; height: 1056px; margin: 0 auto; box-sizing: border-box; background: #F7F5F0; color: #2D2925; font-family: 'EB Garamond', Georgia, serif; display: flex; flex-direction: column; overflow: hidden">
 
   <section style="position: relative; height: 268px; flex-shrink: 0; overflow: hidden; background: #202B2A">
@@ -129,5 +137,26 @@ body{background:#D3C8B2}
   </section>
 
 </main>
+</div>
+<script>
+(function(){
+  var DESIGN_WIDTH = 816;
+  var wrap = document.getElementById('scale-wrap');
+  function fit(){
+    var vw = window.innerWidth;
+    if (vw < DESIGN_WIDTH) {
+      var scale = vw / DESIGN_WIDTH;
+      wrap.style.transform = 'scale(' + scale + ')';
+      wrap.style.height = (1056 * scale) + 'px';
+    } else {
+      wrap.style.transform = 'none';
+      wrap.style.height = 'auto';
+    }
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', fit);
+})();
+</script>
 </body>
 </html>
